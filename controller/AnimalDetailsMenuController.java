@@ -54,8 +54,8 @@ public class AnimalDetailsMenuController implements Initializable {
         animalIdLbl.setText(String.valueOf(dog.getId()));
         breedLbl.setText(dog.getBreed());
         behaviorLbl.setText(dog.getBehavior());
-        lifespanLbl.setText(String.valueOf(dog.getLifespan());
-        priceLbl.setText(String.valueOf(dog.getPrice());
+        lifespanLbl.setText(String.valueOf(dog.getLifespan()));
+        priceLbl.setText(String.valueOf(dog.getPrice()));
 
         if (dog.isVaccinated())
             vacLbl.setText("Yes");

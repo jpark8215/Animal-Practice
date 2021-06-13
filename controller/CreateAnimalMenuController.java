@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.DataProvider;
 import model.Dog;
@@ -56,25 +53,47 @@ public class CreateAnimalMenuController implements Initializable {
 
     @FXML
     void onActionSaveAnimal(ActionEvent event) throws IOException {
-        int id = Integer.parseInt(animalIdTxt.getText());
-        String breed = breedTxt.getText();
-        int lifespan = Integer.parseInt(lifespanTxt.getText());
-        String behavior = behaviorTxt.getText();
-        double price = Double.parseDouble(priceTxt.getText());
-        boolean vaccinated;
-        String special = null;
 
-        if(vacYesRBtn.isSelected())
-            vaccinated = true;
-        else
-            vaccinated = false;
+        //Exception handler try - catch when nothing is saved
+        try{
 
-        DataProvider.addAnimal(new Dog(id, breed, lifespan, behavior, price, vaccinated, special));
+            int id = Integer.parseInt(animalIdTxt.getText());
+            String breed = breedTxt.getText();
+            int lifespan = Integer.parseInt(lifespanTxt.getText());
+            String behavior = behaviorTxt.getText();
+            double price = Double.parseDouble(priceTxt.getText());
+            boolean vaccinated;
+            String special = null;
 
-        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+            if(vacYesRBtn.isSelected())
+                vaccinated = true;
+            else
+                vaccinated = false;
+
+            DataProvider.addAnimal(new Dog(id, breed, lifespan, behavior, price, vaccinated, special));
+
+            stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+
+        catch(NumberFormatException e){
+            //Error dialogue box
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialogue");
+            alert.setContentText("Please enter valid value for each text fields");
+            alert.showAndWait();
+
+
+            /* //Exception handling codes
+            System.out.println("Please enter valid value in text fields");
+            System.out.println("Exception" + e);
+            System.out.println("Exception" + e.getMessage());
+            */
+
+        }
+
     }
 
     @Override
