@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -85,11 +86,32 @@ public class DisplayAnimalMenuController implements Initializable {
         return false;
     }
 
+    public Animal selectAnimal(int id){
+        for (Animal dog : DataProvider.getAllAnimals()){
+            if(dog.getId() == id)
+                return dog;
+        }
+        return null;
+    }
+
+    public ObservableList<Animal> filter(String breed){
+        if(!(DataProvider.getAllFilteredAnimalsAnimals().isEmpty()))
+            DataProvider.getAllFilteredAnimalsAnimals().clear();
+        
+        for(Animal dog : DataProvider.getAllAnimals()){
+            if(dog.getBreed().contains(breed))
+                DataProvider.getAllFilteredAnimalsAnimals().add(dog);
+        }
+        return DataProvider.getAllFilteredAnimalsAnimals();
+    }
+
+
     //Initialize the controller class
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        animalTableView.setItems(DataProvider.getAllAnimals());
+       // animalTableView.setItems(DataProvider.getAllAnimals());
+        animalTableView.setItems(filter("A"));
 //Get Id from return ID of the dog object
 
         //ERROR: Observable list - linked with Main
@@ -103,12 +125,16 @@ public class DisplayAnimalMenuController implements Initializable {
           System.out.println("Update Successful!");
         else
           System.out.println("Update Failed!");
-        */
+
 
         if (delete(3))
             System.out.println("Delete Successful!");
         else
             System.out.println("No Match!");
+         */
+
+        //Select item from a table
+        animalTableView.getSelectionModel().select(selectAnimal(3));
     }
 }
 
