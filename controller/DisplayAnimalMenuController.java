@@ -48,10 +48,28 @@ public class DisplayAnimalMenuController implements Initializable {
 
     @FXML
     void onActionDisplayMainMenu(ActionEvent event) throws IOException {
+
+        //Transfer data from other controller
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/MainMenu.fxml"));
+        loader.load();
+
+        //Create reference variable
+        //ERROR: ADM controller class - linked with Animal Details Controller
+        AnimalDetailsMenuController.ADMController = loader.getController();
+        ADMController.sendAnimal(animalTableView.getSelectionModel().getSelectedItem());
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        Parent scene = loader.getRoot();
+        stage.setScene(new Scene(scene));
+        stage.showAndWait();
+
+        /*
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+        */
     }
 
     public boolean search(int id) {
@@ -94,31 +112,36 @@ public class DisplayAnimalMenuController implements Initializable {
         return null;
     }
 
-    public ObservableList<Animal> filter(String breed){
-        if(!(DataProvider.getAllFilteredAnimalsAnimals().isEmpty()))
+    public ObservableList<Animal> filter(String breed) {
+        if (!(DataProvider.getAllFilteredAnimalsAnimals().isEmpty()))
             DataProvider.getAllFilteredAnimalsAnimals().clear();
-        
-        for(Animal dog : DataProvider.getAllAnimals()){
-            if(dog.getBreed().contains(breed))
+
+        for (Animal dog : DataProvider.getAllAnimals()) {
+            if (dog.getBreed().contains(breed))
                 DataProvider.getAllFilteredAnimalsAnimals().add(dog);
         }
-        return DataProvider.getAllFilteredAnimalsAnimals();
+
+
+            if ((DataProvider.getAllFilteredAnimalsAnimals().isEmpty()))
+                DataProvider.getAllAnimals();
+            else
+                return DataProvider.getAllFilteredAnimalsAnimals();
+
     }
 
+        //Initialize the controller class
+        @Override
+        public void initialize (URL url, ResourceBundle resourceBundle){
 
-    //Initialize the controller class
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+            // animalTableView.setItems(DataProvider.getAllAnimals());
+            //animalTableView.setItems(filter("A"));
 
-       // animalTableView.setItems(DataProvider.getAllAnimals());
-        animalTableView.setItems(filter("A"));
 //Get Id from return ID of the dog object
-
-        //ERROR: Observable list - linked with Main
-        animalIdCol.setCellValueFactory(new propertyValueFactory<>("id"));
-        breedCol.setCellValueFactory(new propertyValueFactory<>("breed"));
-        lifespanCol.setCellValueFactory(new propertyValueFactory<>("lifespan"));
-        priceCol.setCellValueFactory(new propertyValueFactory<>("price"));
+            //ERROR: Observable list - linked with Main
+            animalIdCol.setCellValueFactory(new propertyValueFactory<>("id"));
+            breedCol.setCellValueFactory(new propertyValueFactory<>("breed"));
+            lifespanCol.setCellValueFactory(new propertyValueFactory<>("lifespan"));
+            priceCol.setCellValueFactory(new propertyValueFactory<>("price"));
 
         /*
         if (update(5, new Dog(55,"German Shepard", 13, "Alert", 399.99, true, "Gymnast")))
@@ -131,11 +154,12 @@ public class DisplayAnimalMenuController implements Initializable {
             System.out.println("Delete Successful!");
         else
             System.out.println("No Match!");
+
+
+            //Select item from a table
+            animalTableView.getSelectionModel().select(selectAnimal(3));
+
          */
-
-        //Select item from a table
-        animalTableView.getSelectionModel().select(selectAnimal(3));
+        }
     }
-}
-
 

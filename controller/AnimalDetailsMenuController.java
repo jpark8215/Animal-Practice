@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import model.Animal;
+import model.Dog;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,6 +48,25 @@ public class AnimalDetailsMenuController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
+    //Pass reference to dog object from Display Animal
+    public void sendAnimal(Animal dog){
+        animalIdLbl.setText(String.valueOf(dog.getId()));
+        breedLbl.setText(dog.getBreed());
+        behaviorLbl.setText(dog.getBehavior());
+        lifespanLbl.setText(String.valueOf(dog.getLifespan());
+        priceLbl.setText(String.valueOf(dog.getPrice());
+
+        if (dog.isVaccinated())
+            vacLbl.setText("Yes");
+        else
+            vacLbl.setText("No");
+
+        //Cast reference into super class
+        if (dog instanceof Dog)
+            specialLbl.setText(((Dog) dog).getSpecial());
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
