@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AnimalDetailsMenuController implements Initializable {
+
     Stage stage;
     Parent scene;
 
@@ -42,14 +43,14 @@ public class AnimalDetailsMenuController implements Initializable {
     private Label specialLbl;
 
     @FXML
-    void onActionDisplayMainMenu(ActionEvent event) throws IOException {
+    void onActionDisplayDisplayAnimalMenu(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/DisplayAnimalMenu.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
 
-    //Pass reference to dog object from Display Animal
+    //Define method accept object. Pass reference to dog object from Display Animal
     public void sendAnimal(Animal dog){
         animalIdLbl.setText(String.valueOf(dog.getId()));
         breedLbl.setText(dog.getBreed());
@@ -62,7 +63,7 @@ public class AnimalDetailsMenuController implements Initializable {
         else
             vacLbl.setText("No");
 
-        //Cast reference into super class
+        //Cast reference into super class from dog to Animal
         if (dog instanceof Dog)
             specialLbl.setText(((Dog) dog).getSpecial());
     }

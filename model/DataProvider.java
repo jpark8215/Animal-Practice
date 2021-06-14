@@ -18,6 +18,6 @@ public class DataProvider {
 
     //Returning all observable filtered animal list
     public static ObservableList<Animal> getAllFilteredAnimalsAnimals(){
-        return allAnimals;
+        return allFilteredAnimals;
     }
 }

@@ -67,12 +67,14 @@ public class CreateAnimalMenuController implements Initializable {
         //Exception handler try - catch when nothing is saved
         try{
 
+            //Wrapper class get text brings string
             int id = Integer.parseInt(animalIdTxt.getText());
             String breed = breedTxt.getText();
             int lifespan = Integer.parseInt(lifespanTxt.getText());
             String behavior = behaviorTxt.getText();
             double price = Double.parseDouble(priceTxt.getText());
             boolean vaccinated;
+            //UI has no ability collecting this See Dog.java
             String special = null;
 
             if(vacYesRBtn.isSelected())
@@ -80,7 +82,9 @@ public class CreateAnimalMenuController implements Initializable {
             else
                 vaccinated = false;
 
+            //Create new Dog object see DataProvider.java
             DataProvider.addAnimal(new Dog(id, breed, lifespan, behavior, price, vaccinated, special));
+
 
             stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));

@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Animal;
 import model.DataProvider;
+import model.Dog;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,39 +41,14 @@ public class DisplayAnimalMenuController implements Initializable {
     private TableColumn<Animal, Double> priceCol;
 
     @FXML
-    void onActionDisplayAnimalDetailsMenu(ActionEvent event) throws IOException {
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/DisplayAnimalMenu.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
-    }
-
-    @FXML
-    void onActionDisplayMainMenu(ActionEvent event) throws IOException {
-
-        //Transfer data from other controller
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/view/MainMenu.fxml"));
-        loader.load();
-
-        //Create reference variable
-        //ERROR: ADM controller class - linked with Animal Details Controller
-        AnimalDetailsMenuController.ADMController = loader.getController();
-        ADMController.sendAnimal(animalTableView.getSelectionModel().getSelectedItem());
-
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        Parent scene = loader.getRoot();
-        stage.setScene(new Scene(scene));
-        stage.showAndWait();
-
-        /*
+    void onActionDisplayMainMenu (ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
-        */
     }
 
+    //Search data from table
     public boolean search(int id) {
         for (Animal dog : DataProvider.getAllAnimals()) {
             if(dog.getId() == id)
@@ -87,6 +63,7 @@ public class DisplayAnimalMenuController implements Initializable {
         for(Animal dog : DataProvider.getAllAnimals()){
             index++;
 
+            //Compare id in the index parameter
             if(dog.getId() == id){
                 DataProvider.getAllAnimals().set(index, animal);
                 return true;
@@ -105,6 +82,7 @@ public class DisplayAnimalMenuController implements Initializable {
         return false;
     }
 
+    //Go through animal id and select Dog is going to reference Animal
     public Animal selectAnimal(int id){
         for (Animal dog : DataProvider.getAllAnimals()){
             if(dog.getId() == id)
@@ -113,7 +91,9 @@ public class DisplayAnimalMenuController implements Initializable {
         return null;
     }
 
+    //From data provider all filtered data
     public ObservableList<Animal> filter(String breed) {
+        //Clear original filter
         if (!(DataProvider.getAllFilteredAnimalsAnimals().isEmpty()))
             DataProvider.getAllFilteredAnimalsAnimals().clear();
 
@@ -122,13 +102,40 @@ public class DisplayAnimalMenuController implements Initializable {
                 DataProvider.getAllFilteredAnimalsAnimals().add(dog);
         }
 
-
-            if ((DataProvider.getAllFilteredAnimalsAnimals().isEmpty()))
-                DataProvider.getAllAnimals();
-            else
-                return DataProvider.getAllFilteredAnimalsAnimals();
-
+        //Switch between filtered and original list
+        if ((DataProvider.getAllFilteredAnimalsAnimals().isEmpty()))
+            return DataProvider.getAllAnimals();
+        else
+            return DataProvider.getAllFilteredAnimalsAnimals();
     }
+
+    @FXML
+    void onActionDisplayAnimalDetailsMenu (ActionEvent event) throws IOException {
+
+        //Transfer data between controllers
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/AnimalDetailsMenu.fxml"));
+        loader.load();
+
+        //Create reference variable. Instance of animal details controller
+        //ERROR: ADM controller class - linked with Animal Details Controller, reference variable error
+        AnimalDetailsMenuController.ADMController = loader.getController();
+        ADMController.sendAnimal(animalTableView.getSelectionModel().getSelectedItem());
+
+        //Switch to animal details screen
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        Parent scene = loader.getRoot();
+        stage.setScene(new Scene(scene));
+        stage.showAndWait();
+
+        /*
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+        */
+    }
+
 
         //Initialize the controller class
         @Override
@@ -136,7 +143,9 @@ public class DisplayAnimalMenuController implements Initializable {
 
             //table view setter  getter from Data provider
             animalTableView.setItems(DataProvider.getAllAnimals());
-            //animalTableView.setItems(filter("A"));
+            //Get items from filter public ObservableList<Animal> filter
+            animalTableView.setItems(filter("A"));
+
 
             //Get data from return data of the dog object
             animalIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -144,23 +153,24 @@ public class DisplayAnimalMenuController implements Initializable {
             lifespanCol.setCellValueFactory(new PropertyValueFactory<>("lifespan"));
             priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        /*
+
+        //initialize update - public boolean update
         if (update(5, new Dog(55,"German Shepard", 13, "Alert", 399.99, true, "Gymnast")))
           System.out.println("Update Successful!");
         else
           System.out.println("Update Failed!");
 
 
+        //Initialize remove - public boolean delete
         if (delete(3))
             System.out.println("Delete Successful!");
         else
             System.out.println("No Match!");
 
 
-            //Select item from a table
+        //Initialize select item from a table public Animal selectAnimal
             animalTableView.getSelectionModel().select(selectAnimal(3));
 
-         */
         }
     }
 

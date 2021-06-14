@@ -20,8 +20,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-//ERROR: Observable list - linked with display animal controller
 
+        //Objects for observable list
         Dog dog1 = new Dog(1,"Siberian Husky", 15, "Crafty", 599.99, true, "Whistles");
         Dog dog2 = new Dog(2,"Alaskan Malamute", 12, "Energetic", 699.99, true, "Climbs");
         Dog dog3 = new Dog(3,"Dalmatian", 13, "Energetic", 799.99, true, "Gymnast");
