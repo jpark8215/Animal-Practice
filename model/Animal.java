@@ -1,5 +1,6 @@
 package model;
 
+//Superclass
 //Abstract cannot be instantiated only for inheriting
 public abstract class Animal {
     private int id;

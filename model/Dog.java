@@ -1,6 +1,6 @@
 package model;
 
-//Subclass inheriting from super class needs to use super commands
+//Subclass inheriting from super class needs to use super commands ie. needs constructor
 public class Dog extends Animal{
     private String special;
 
@@ -10,11 +10,7 @@ public class Dog extends Animal{
         this.special = special;
     }
 
-    public String getSpecial() {
-        return special;
-    }
+    public String getSpecial() { return special; }
 
-    public void setSpecial(String special) {
-        this.special = special;
-    }
+    public void setSpecial(String special) { this.special = special; }
 }
