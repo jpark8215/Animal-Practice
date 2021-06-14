@@ -14,15 +14,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
-//Create global variable
+    //Create global variable
     Stage stage;
     Parent scene;
 
     @FXML
     void onActionCreateAnimal(ActionEvent event) throws IOException {
-        //Cast to button and get methods/containers
+        //Cast to button and pass the window into stage
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/CreateAnimalMenu.fxml"));
+        //Add scene to stage
         stage.setScene(new Scene(scene));
         stage.show();
     }

@@ -49,10 +49,11 @@ public class CreateAnimalMenuController implements Initializable {
         //Confirmation when clicked back button
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will clear all text field values, do you want to continue?");
 
-        //Confirmation enum array 
+        //Confirmation enum array
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
 
+            //Event handling loader
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
             stage.setScene(new Scene(scene));

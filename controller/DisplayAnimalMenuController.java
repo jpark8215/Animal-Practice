@@ -10,10 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Animal;
 import model.DataProvider;
-import model.Dog;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +23,7 @@ public class DisplayAnimalMenuController implements Initializable {
     Stage stage;
     Parent scene;
 
+    //Get data from Model into table
     @FXML
     private TableView<Animal> animalTableView;
 
@@ -133,15 +134,15 @@ public class DisplayAnimalMenuController implements Initializable {
         @Override
         public void initialize (URL url, ResourceBundle resourceBundle){
 
-            // animalTableView.setItems(DataProvider.getAllAnimals());
+            //table view setter  getter from Data provider
+            animalTableView.setItems(DataProvider.getAllAnimals());
             //animalTableView.setItems(filter("A"));
 
-//Get Id from return ID of the dog object
-            //ERROR: Observable list - linked with Main
-            animalIdCol.setCellValueFactory(new propertyValueFactory<>("id"));
-            breedCol.setCellValueFactory(new propertyValueFactory<>("breed"));
-            lifespanCol.setCellValueFactory(new propertyValueFactory<>("lifespan"));
-            priceCol.setCellValueFactory(new propertyValueFactory<>("price"));
+            //Get data from return data of the dog object
+            animalIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+            breedCol.setCellValueFactory(new PropertyValueFactory<>("breed"));
+            lifespanCol.setCellValueFactory(new PropertyValueFactory<>("lifespan"));
+            priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         /*
         if (update(5, new Dog(55,"German Shepard", 13, "Alert", 399.99, true, "Gymnast")))
