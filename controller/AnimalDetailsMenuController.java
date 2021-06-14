@@ -43,14 +43,14 @@ public class AnimalDetailsMenuController implements Initializable {
     private Label specialLbl;
 
     @FXML
-    void onActionDisplayDisplayAnimalMenu(ActionEvent event) throws IOException {
+    void onActionDisplayAnimalMenu(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/DisplayAnimalMenu.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
 
-    //Define method accept object. Pass reference to dog object from Display Animal
+    //Define method accept object. Pass reference to dog object from Animal
     public void sendAnimal(Animal dog){
         animalIdLbl.setText(String.valueOf(dog.getId()));
         breedLbl.setText(dog.getBreed());

@@ -117,6 +117,7 @@ public class DisplayAnimalMenuController implements Initializable {
         loader.setLocation(getClass().getResource("/view/AnimalDetailsMenu.fxml"));
         loader.load();
 
+
         //Create reference variable. Instance of animal details controller
         //ERROR: ADM controller class - linked with Animal Details Controller, reference variable error
         AnimalDetailsMenuController.ADMController = loader.getController();
@@ -128,12 +129,6 @@ public class DisplayAnimalMenuController implements Initializable {
         stage.setScene(new Scene(scene));
         stage.showAndWait();
 
-        /*
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
-        */
     }
 
 
