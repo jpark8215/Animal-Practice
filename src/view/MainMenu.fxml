@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="320.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="320.0" spacing="10.0">
+               <children>
+                  <Button maxWidth="61.0" mnemonicParsing="false" onAction="#onActionCreateAnimal" text="CREATE" />
+                  <Button layoutX="142.0" layoutY="98.0" mnemonicParsing="false" onAction="#onActionDisplayAnimal" text="DISPLAY" />
+                  <Button layoutX="142.0" layoutY="110.0" maxWidth="61.0" mnemonicParsing="false" onAction="#onActionExit" text="EXIT" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>
